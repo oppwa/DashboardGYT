@@ -106,7 +106,8 @@
   tfoot td{font-weight:700;border-top:2px solid var(--line);border-bottom:0;color:var(--navy);}
   .tbl-wrap{overflow-x:auto;}
 
-  footer{margin-top:10px;padding-top:16px;border-top:1px solid var(--line);font-size:.8rem;color:var(--ink-soft);display:grid;gap:6px;}
+  footer{margin-top:10px;padding-top:16px;border-top:1px solid var(--line);font-size:.85rem;color:var(--ink-soft);text-align:center;font-weight:500;}
+  .reg{display:inline-flex;align-items:center;justify-content:center;width:1.05em;height:1.05em;border:1.3px solid currentColor;border-radius:50%;font-size:.7em;font-weight:700;line-height:1;vertical-align:.15em;margin-left:2px;}
 
   @media (max-width:1000px){
     .stats-row{grid-template-columns:1fr 1fr;} .stat.hero{grid-column:1/-1;}
@@ -301,11 +302,11 @@
   </div>
 
   <footer>
-    <div id="foot-src"></div>
-    <div id="foot-note"></div>
-    <div id="foot-warn"></div>
-    <div>Universidad Andina del Cusco · Oficina de Grados y Títulos</div>
+    <div>Oficina de Grados y Títulos · Secretaría General · Universidad Andina del Cusco <span class="reg" aria-label="marca registrada">R</span></div>
   </footer>
+
+
+
 </main>
 
 <script>
@@ -407,8 +408,8 @@ function render(){
   const ss=[...sess].map(i=>D.sess[i]).sort();
   $('rango').textContent=ss.length?dtxt(ss[0])+' – '+dtxt(ss[ss.length-1]):'—';
   const tb=D.rows.filter(r=>r[T]==0).length;
-  $('foot-note').textContent='Los totales cuentan filas con resolución aprobada: '+fmt(tb)+' en la hoja BACHILLERATOS y '+fmt(D.rows.length-tb)+' en TÍTULOS. En registros antiguos faltan sede y sexo («Sin dato»). El panel no incluye nombres, DNI ni contactos; el DNI solo se usa en el servidor para cruzar bachilleratos con títulos.';
-  $('foot-src').innerHTML='Fuente: hoja «Grados y Títulos 2022-2026 rectora» (pestañas BACHILLERATOS y TÍTULOS). Datos hasta la sesión del '+dtxt(LASTSESS)+'. *Año en curso.';
+
+
   document.querySelectorAll('[data-legend="tipo"]').forEach(el=>{
     el.innerHTML=tipos().map(t=>'<span><i class="sw" style="background:'+(t?'var(--c-tit)':'var(--c-bach)')+'"></i>'+TIPO_N[t]+'</span>').join('');
   });
@@ -684,7 +685,7 @@ async function load(){
     const cuando=gen&&!isNaN(new Date(gen))?new Date(gen).toLocaleString('es-PE',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',timeZone:'America/Lima'}):'';
     setStatus('vivo','Datos de la hoja'+(cuando?' al '+cuando:'')+' · revisado a las '+hora);
     const w=d.meta&&d.meta.sinClasificar||[];
-    $('foot-warn').textContent=w.length?'Carreras sin clasificar en la hoja: '+w.join('; ')+'.':'';
+
   }catch(e){
     setStatus('error','Sin conexión con la hoja; se muestra la última copia');
   }
