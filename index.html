@@ -1,98 +1,79 @@
-<!doctype html>
-<html lang="es">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light dark">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%230B2740'/%3E%3Crect x='6' y='16' width='5' height='10' fill='%2300AEEF'/%3E%3Crect x='13.5' y='10' width='5' height='16' fill='%2300AEEF'/%3E%3Crect x='21' y='5' width='5' height='21' fill='%2300AEEF'/%3E%3C/svg%3E">
-<title>Grados y Títulos UAC</title>
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%230B2E4F%27/%3E%3Cpath d=%27M16 7l11 5-11 5-11-5z%27 fill=%27%235BC2E7%27/%3E%3Cpath d=%27M9 15v5c0 2 3 4 7 4s7-2 7-4v-5l-7 3z%27 fill=%27%23fff%27/%3E%3C/svg%3E"><title>Grados y Títulos UAC</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
-  /* Layout: masthead oscuro, barra de filtros fija, KPIs, secciones de paneles en rejilla; mismo lenguaje visual que el tablero de oficios del VRAC */
   :root{
-    --paper:#EEF3F8; --card:#FFFFFF; --ink:#0F2C49; --ink-soft:#57708A;
-    --line:#CBDAE7; --line-soft:#DEE9F2;
-    --azul:#194D84; --azul-oscuro:#0B2740; --celeste:#00AEEF;
-    --c-tit:#194D84; --c-bach:#00AEEF; --c-teal:#0E8C9E; --c-slate:#5D7A99; --c-muted:#B7C6D6;
-    --heat:#194D84; --mast-text:#AFC6DA; --on-accent:#FFFFFF;
-    --serif:'Source Serif 4',Georgia,serif; --sans:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
-  }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --paper:#081826; --card:#0F2438; --ink:#E4EDF6; --ink-soft:#8FA9C2;
-      --line:#1D3852; --line-soft:#173049;
-      --azul:#4A86CC; --azul-oscuro:#06121E; --celeste:#00AEEF;
-      --c-tit:#4A86CC; --c-bach:#00AEEF; --c-teal:#27B3C4; --c-slate:#8AA6C4; --c-muted:#3B546D;
-      --heat:#1F9BE0; --mast-text:#9DB6CC; --on-accent:#FFFFFF;
-      color-scheme:dark;
-    }
-  }
-  :root[data-theme="dark"]{
-    --paper:#081826; --card:#0F2438; --ink:#E4EDF6; --ink-soft:#8FA9C2;
-    --line:#1D3852; --line-soft:#173049;
-    --azul:#4A86CC; --azul-oscuro:#06121E; --celeste:#00AEEF;
-    --c-tit:#4A86CC; --c-bach:#00AEEF; --c-teal:#27B3C4; --c-slate:#8AA6C4; --c-muted:#3B546D;
-    --heat:#1F9BE0; --mast-text:#9DB6CC; --on-accent:#FFFFFF;
-    color-scheme:dark;
+    --navy:#0B2E4F; --navy-light:#16406b; --celeste:#5BC2E7; --celeste-soft:#A8DEF5; --turquesa:#7ED4D4; --turquesa-soft:#C4EDED;
+    --paper:#F4F7FA; --card:#FFFFFF; --ink:#1F2E3D; --ink-soft:#6B7A8A; --line:#E4EBF2; --line-soft:#EEF3F8;
+    --c-tit:#0B2E4F; --c-bach:#5BC2E7; --c-teal:#7ED4D4; --c-slate:#5D7A99; --c-muted:#B0BEC5; --heat:#0B2E4F;
+    --sans:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+    --shadow:0 4px 18px rgba(11,46,79,.06);
   }
   *{box-sizing:border-box;}
   html,body{margin:0;}
-  body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.5;-webkit-font-smoothing:antialiased;font-size:15px;}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.5;-webkit-font-smoothing:antialiased;font-size:15px;padding:24px 20px 40px;}
   ::selection{background:var(--celeste);color:#fff;}
-  .wrap{max-width:1180px;margin:0 auto;padding-inline:20px;}
+  .wrap{max-width:1280px;margin:0 auto;}
   h1,h2,h3{text-wrap:balance;}
 
-  header.masthead{background:var(--azul-oscuro);border-bottom:3px solid var(--celeste);}
-  header.masthead .wrap{padding-block:30px 22px;display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;}
-  .masthead h1{font-family:var(--serif);font-weight:600;font-size:clamp(1.55rem,4.2vw,2.05rem);line-height:1.18;margin:0 0 8px;letter-spacing:-0.01em;color:#fff;max-width:660px;}
-  .masthead p{margin:0;color:var(--mast-text);font-size:.96rem;max-width:580px;}
-  .masthead .right{text-align:right;font-size:.85rem;color:var(--mast-text);}
-  .masthead .org{font-family:var(--serif);font-weight:600;color:var(--celeste);font-size:1rem;margin-bottom:2px;}
-
-  .upd{margin-top:6px;font-size:.78rem;display:inline-flex;align-items:center;gap:7px;}
-  .upd::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--mast-text);}
+  header.masthead{background:var(--navy);border-radius:20px;color:#fff;padding:26px 32px;margin-bottom:20px;box-shadow:var(--shadow);}
+  header.masthead .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;}
+  .masthead h1{font-weight:800;font-size:clamp(1.35rem,3.6vw,1.9rem);line-height:1.2;margin:0 0 6px;border-left:6px solid var(--celeste);padding-left:16px;letter-spacing:-.01em;}
+  .masthead p{margin:0;color:var(--celeste-soft);font-size:.92rem;padding-left:22px;max-width:640px;}
+  .masthead .right{text-align:right;font-size:.85rem;color:var(--celeste-soft);}
+  .masthead .org{font-weight:700;color:#fff;font-size:1rem;margin-bottom:2px;}
+  .masthead .org i{color:var(--celeste);margin-right:6px;}
+  .upd{margin-top:6px;font-size:.78rem;display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.1);padding:4px 12px;border-radius:20px;}
+  .upd::before{content:"";width:8px;height:8px;border-radius:50%;background:#9fb4c8;}
   .upd.vivo::before{background:#3DD68C;}
   .upd.error::before{background:#F2B84B;}
-  .filters{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--card);border-bottom:1px solid var(--line);}
-  .filters .wrap{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;padding-block:10px;}
+
+  .filters{position:sticky;top:8px;z-index:20;background:var(--card);border-radius:18px;box-shadow:var(--shadow);border:1px solid var(--line);margin-bottom:22px;}
+  .filters .wrap{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;padding:12px 20px;}
   .fgroup{display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-width:0;}
-  .fgroup > label,.flabel{font-size:.7rem;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;}
-  .seg{display:inline-flex;border:1px solid var(--line);border-radius:3px;overflow:hidden;flex-wrap:wrap;}
-  .seg button{font:inherit;font-size:.84rem;background:var(--card);color:var(--ink);border:0;border-right:1px solid var(--line);padding:6px 12px;cursor:pointer;}
-  .seg button:last-child{border-right:0;}
-  .seg button:hover{background:var(--line-soft);}
-  .seg button[aria-pressed="true"]{background:var(--azul);color:#fff;font-weight:600;}
-  .filters select{font:inherit;font-size:.84rem;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:3px;padding:6px 8px;max-width:100%;}
+  .fgroup > label,.flabel{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;}
+  .fgroup .sep{color:var(--ink-soft);font-size:.85rem;}
+  .seg{display:inline-flex;background:var(--paper);border-radius:12px;padding:3px;flex-wrap:wrap;gap:2px;}
+  .seg button{font:inherit;font-size:.84rem;font-weight:500;background:transparent;color:var(--ink);border:0;padding:6px 14px;border-radius:9px;cursor:pointer;}
+  .seg button:hover{background:var(--celeste-soft);}
+  .seg button[aria-pressed="true"]{background:var(--navy);color:#fff;font-weight:600;}
+  .chip{font:inherit;font-size:.78rem;background:var(--paper);color:var(--navy);border:1px solid var(--line);border-radius:20px;padding:4px 12px;cursor:pointer;font-weight:500;}
+  .chip:hover{background:var(--celeste-soft);}
+  .filters select{font:inherit;font-size:.84rem;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:6px 10px;max-width:100%;}
   button:focus-visible,select:focus-visible{outline:2px solid var(--celeste);outline-offset:2px;}
-  .reset{font:inherit;font-size:.82rem;background:none;border:0;color:var(--azul);text-decoration:underline;cursor:pointer;padding:4px;margin-left:auto;}
-  :root[data-theme="dark"] .reset{color:var(--celeste);}
-  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .reset{color:var(--celeste);}}
+  .reset{font:inherit;font-size:.82rem;background:none;border:0;color:var(--navy-light);font-weight:600;cursor:pointer;padding:4px;margin-left:auto;}
+  .reset:hover{text-decoration:underline;}
 
-  main{padding-block:28px 60px;}
-  .stats-row{display:grid;grid-template-columns:1.3fr repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:18px;}
-  .stat{background:var(--card);padding:20px 22px;min-width:0;}
-  .stat .num{font-family:var(--serif);font-weight:600;font-size:2.3rem;line-height:1;font-variant-numeric:tabular-nums;}
-  .stat.hero .num{font-size:3rem;color:var(--azul);}
-  :root[data-theme="dark"] .stat.hero .num{color:var(--celeste);}
-  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .stat.hero .num{color:var(--celeste);}}
-  .stat .lbl{margin-top:8px;font-size:.84rem;color:var(--ink-soft);}
-  .stat .sub{margin-top:2px;font-size:.78rem;color:var(--ink-soft);}
-  .sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:baseline;}
+  main.wrap{padding:0;}
+  .stats-row{display:grid;grid-template-columns:1.3fr repeat(4,1fr);gap:16px;margin-bottom:20px;}
+  .stat{background:var(--card);padding:20px 22px;min-width:0;border-radius:18px;box-shadow:var(--shadow);border-bottom:5px solid var(--celeste);}
+  .stat:nth-child(2){border-color:var(--turquesa);} .stat:nth-child(3){border-color:var(--navy-light);}
+  .stat:nth-child(4){border-color:var(--celeste-soft);} .stat:nth-child(5){border-color:#B0BEC5;}
+  .stat .num{font-weight:800;font-size:2rem;line-height:1.05;font-variant-numeric:tabular-nums;color:var(--navy);}
+  .stat.hero .num{font-size:2.7rem;}
+  .stat .lbl{margin-top:8px;font-size:.82rem;color:var(--ink-soft);font-weight:600;}
+  .stat .sub{margin-top:2px;font-size:.76rem;color:var(--ink-soft);}
+  .sw{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:baseline;}
 
-  .insights{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:38px;}
-  .insight{background:var(--card);padding:14px 20px;min-width:0;}
-  .insight .k{font-size:.7rem;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;}
-  .insight .v{font-family:var(--serif);font-weight:600;font-size:1.12rem;margin-top:2px;overflow-wrap:anywhere;}
+  .info-box{background:linear-gradient(135deg,#eaf6fc,#f0fafa);border-left:6px solid var(--celeste);border-radius:18px;padding:16px 22px;margin-bottom:16px;font-size:.92rem;}
+  .info-box h4{margin:0 0 4px;color:var(--navy);font-size:.95rem;font-weight:700;}
+  .info-box h4 i{color:var(--celeste);margin-right:8px;}
+  .info-box p{margin:0;color:var(--ink);}
+  .insights{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:34px;}
+  .insight{background:var(--card);padding:14px 20px;min-width:0;border-radius:16px;box-shadow:var(--shadow);border:1px solid var(--line);}
+  .insight .k{font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;}
+  .insight .v{font-weight:700;font-size:1.08rem;margin-top:2px;overflow-wrap:anywhere;color:var(--navy);}
   .insight .d{font-size:.8rem;color:var(--ink-soft);}
 
-  .section-label{font-size:.76rem;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;margin:0 0 12px;padding-bottom:8px;border-bottom:1px solid var(--line);}
-  .grid{display:grid;gap:18px;margin-bottom:38px;}
+  .section-label{font-size:1.05rem;color:var(--navy);font-weight:700;margin:0 0 14px;display:flex;align-items:center;gap:10px;}
+  .section-label::before{content:"";width:5px;height:20px;border-radius:3px;background:var(--celeste);}
+  .grid{display:grid;gap:18px;margin-bottom:34px;}
   .g2{grid-template-columns:1fr 1fr;} .g3{grid-template-columns:1fr 1fr 1fr;} .g-a{grid-template-columns:1fr 1fr;} .g-b{grid-template-columns:1fr 1.55fr;}
-  .panel{background:var(--card);border:1px solid var(--line);padding:20px 22px 18px;min-width:0;}
-  .panel h3{font-family:var(--serif);font-weight:600;font-size:1.12rem;margin:0 0 4px;letter-spacing:-.005em;}
+  .panel{background:var(--card);border-radius:22px;box-shadow:var(--shadow);padding:22px 24px 20px;min-width:0;}
+  .panel h3{font-weight:700;font-size:1.02rem;margin:0 0 4px;color:var(--navy);}
   .panel .note{margin:0 0 14px;font-size:.82rem;color:var(--ink-soft);max-width:68ch;}
   .ch{position:relative;width:100%;}
   .scroll-x{overflow-x:auto;}
@@ -100,56 +81,52 @@
   .legend span{display:inline-flex;align-items:center;}
   .empty{padding:36px 0;text-align:center;color:var(--ink-soft);font-size:.88rem;}
 
-  /* heatmap */
-  .heat{display:grid;grid-template-columns:40px repeat(12,minmax(0,1fr));gap:2px;font-variant-numeric:tabular-nums;min-width:440px;}
+  .heat{display:grid;grid-template-columns:40px repeat(12,minmax(0,1fr));gap:3px;font-variant-numeric:tabular-nums;min-width:440px;}
   .heat .h{font-size:.7rem;color:var(--ink-soft);text-align:center;letter-spacing:.04em;text-transform:uppercase;padding-bottom:3px;}
-  .heat .y{font-size:.8rem;font-weight:600;display:flex;align-items:center;}
-  .heat .c{font-size:.68rem;text-align:center;padding:10px 0;border-radius:2px;background:var(--line-soft);color:var(--ink-soft);}
+  .heat .y{font-size:.8rem;font-weight:700;display:flex;align-items:center;color:var(--navy);}
+  .heat .c{font-size:.68rem;text-align:center;padding:10px 0;border-radius:6px;background:var(--line-soft);color:var(--ink-soft);}
   .heat .c.on{color:var(--ink);}
   .heat .c.dark{color:#fff;}
 
-  /* ranking list */
-  .rank{list-style:none;margin:0;padding:0;display:grid;gap:11px;}
-  .rank li{display:grid;grid-template-columns:1fr auto;gap:2px 10px;align-items:baseline;font-size:.86rem;}
+  .rank{list-style:none;margin:0;padding:0;display:grid;gap:12px;}
+  .rank li{display:grid;grid-template-columns:1fr auto;gap:3px 10px;align-items:baseline;font-size:.86rem;}
   .rank .nm{min-width:0;overflow-wrap:anywhere;}
-  .rank .vl{font-variant-numeric:tabular-nums;font-weight:600;}
-  .rank .bar{grid-column:1/-1;height:6px;background:var(--line-soft);border-radius:3px;overflow:hidden;}
-  .rank .bar i{display:block;height:100%;background:var(--c-tit);border-radius:3px;}
+  .rank .vl{font-variant-numeric:tabular-nums;font-weight:700;color:var(--navy);}
+  .rank .bar{grid-column:1/-1;height:8px;background:var(--line-soft);border-radius:8px;overflow:hidden;}
+  .rank .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--celeste),var(--navy-light));border-radius:8px;}
 
-  /* tables */
-  .tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:12px;}
-  .tabs button{font:inherit;font-size:.84rem;background:none;border:1px solid var(--line);color:var(--ink);padding:6px 12px;border-radius:3px;cursor:pointer;}
-  .tabs button[aria-selected="true"]{background:var(--azul);border-color:var(--azul);color:#fff;font-weight:600;}
+  .tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
+  .tabs button{font:inherit;font-size:.84rem;background:var(--paper);border:0;color:var(--ink);padding:7px 14px;border-radius:10px;cursor:pointer;font-weight:500;}
+  .tabs button[aria-selected="true"]{background:var(--navy);color:#fff;font-weight:600;}
   table{border-collapse:collapse;width:100%;font-size:.86rem;font-variant-numeric:tabular-nums;}
-  th,td{text-align:right;padding:8px 10px;border-bottom:1px solid var(--line-soft);}
+  th,td{text-align:right;padding:9px 10px;border-bottom:1px solid var(--line);}
   th:first-child,td:first-child{text-align:left;}
-  th{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;border-bottom:1px solid var(--line);white-space:nowrap;}
-  tfoot td{font-weight:700;border-top:1px solid var(--line);border-bottom:0;}
+  th{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--navy);font-weight:600;white-space:nowrap;}
+  th:first-child{border-radius:10px 0 0 10px;} th:last-child{border-radius:0 10px 10px 0;}
+  tfoot td{font-weight:700;border-top:2px solid var(--line);border-bottom:0;color:var(--navy);}
   .tbl-wrap{overflow-x:auto;}
 
   footer{margin-top:10px;padding-top:16px;border-top:1px solid var(--line);font-size:.8rem;color:var(--ink-soft);display:grid;gap:6px;}
 
-  @media (max-width:900px){
+  @media (max-width:1000px){
     .stats-row{grid-template-columns:1fr 1fr;} .stat.hero{grid-column:1/-1;}
     .g2,.g3,.g-a,.g-b{grid-template-columns:1fr;}
     .insights{grid-template-columns:1fr;}
     .masthead .right{text-align:left;}
     .reset{margin-left:0;}
   }
-  @media (max-width:520px){ .wrap{padding-inline:16px;} .panel{padding:16px;} .stat{padding:16px;} .stat .num{font-size:1.9rem;} .stat.hero .num{font-size:2.5rem;} }
+  @media (max-width:520px){ body{padding:12px 12px 30px;} header.masthead{padding:20px 18px;} .panel{padding:16px;} .stat{padding:16px;} .stat .num{font-size:1.7rem;} .stat.hero .num{font-size:2.3rem;} .filters .wrap{padding:10px 14px;} }
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
-</style>
-</head>
-<body>
+</style></head><body>
 
 <header class="masthead">
   <div class="wrap">
     <div>
-      <h1>Grados y Títulos: diplomas emitidos 2022–2026</h1>
+      <h1>Dashboard de Grados y Títulos</h1>
       <p>Bachilleratos y títulos profesionales aprobados por el Consejo Universitario, a partir de los registros de la Oficina de Grados y Títulos.</p>
     </div>
     <div class="right">
-      <div class="org">Universidad Andina del Cusco</div>
+      <div class="org"><i class="fas fa-graduation-cap"></i>Universidad Andina del Cusco</div>
       <div id="rango">—</div>
       <div id="upd" class="upd" role="status" aria-live="polite"></div>
     </div>
@@ -164,7 +141,9 @@
         <button type="button" data-v="0" aria-pressed="false">Bachillerato</button>
         <button type="button" data-v="1" aria-pressed="false">Título</button>
       </div></div>
-    <div class="fgroup"><label for="f-year">Año</label><select id="f-year"></select></div>
+    <div class="fgroup"><span class="flabel">Años</span>
+      <select id="f-from" aria-label="Desde el año"></select><span class="sep">a</span><select id="f-to" aria-label="Hasta el año"></select>
+      <button type="button" class="chip" data-quick="all">Todos</button><button type="button" class="chip" data-quick="last2">Últimos 2</button><button type="button" class="chip" data-quick="last">Último</button></div>
     <div class="fgroup"><label for="f-fac">Facultad</label><select id="f-fac"></select></div>
     <div class="fgroup"><label for="f-sede">Sede</label><select id="f-sede"></select></div>
     <button type="button" class="reset" id="reset">Quitar filtros</button>
@@ -180,13 +159,14 @@
     <div class="stat"><div class="num" id="k-avg">0</div><div class="lbl">Diplomas por sesión</div><div class="sub">promedio</div></div>
   </div>
 
+  <div class="info-box"><h4><i class="fas fa-chart-line"></i>Resumen del periodo</h4><p id="resumen"></p></div>
   <div class="insights" id="insights"></div>
 
-  <div class="section-label">Evolución en el tiempo</div>
+  <div class="section-label"><i class="fas fa-chart-line" style="color:var(--celeste)"></i>Evolución en el tiempo</div>
   <div class="grid g-a">
     <div class="panel">
       <h3>Diplomas por año</h3>
-      <p class="note" id="note-year">Las barras opacas son el año seleccionado en el filtro.</p>
+      <p class="note" id="note-year">Años dentro del rango elegido.</p>
       <div class="legend" data-legend="tipo"></div>
       <div class="ch" style="height:300px"><canvas id="c-year" role="img" aria-label="Diplomas por año, bachilleratos y títulos"></canvas></div>
     </div>
@@ -219,7 +199,7 @@
     </div>
   </div>
 
-  <div class="section-label">Dónde se concentran</div>
+  <div class="section-label"><i class="fas fa-building-columns" style="color:var(--celeste)"></i>Dónde se concentran</div>
   <div class="grid g-b">
     <div class="panel">
       <h3>Por facultad</h3>
@@ -241,7 +221,7 @@
     <div class="ch" id="car-box"><canvas id="c-car" role="img" aria-label="Diplomas por carrera"></canvas></div>
   </div>
 
-  <div class="section-label">Cómo se obtienen</div>
+  <div class="section-label"><i class="fas fa-scroll" style="color:var(--celeste)"></i>Cómo se obtienen</div>
   <div class="grid g2">
     <div class="panel" id="p-modb">
       <h3>Modalidad de bachillerato</h3>
@@ -278,7 +258,7 @@
   </div>
 
   <div id="sec-coh">
-    <div class="section-label">De bachiller a titulado</div>
+    <div class="section-label"><i class="fas fa-user-graduate" style="color:var(--celeste)"></i>De bachiller a titulado</div>
     <p class="note" id="coh-meta" style="margin:-2px 0 14px;max-width:none"></p>
     <div class="insights" id="coh-kpi" style="margin-bottom:18px"></div>
     <div class="grid g-a" style="margin-bottom:18px">
@@ -301,7 +281,7 @@
     </div>
   </div>
 
-  <div class="section-label">Sesiones del Consejo Universitario</div>
+  <div class="section-label"><i class="fas fa-landmark" style="color:var(--celeste)"></i>Sesiones del Consejo Universitario</div>
   <div class="panel" style="margin-bottom:38px">
     <h3>Diplomas aprobados por sesión</h3>
     <p class="note" id="note-ses">Cada barra es una fecha de resolución.</p>
@@ -309,7 +289,7 @@
     <div class="scroll-x"><div class="ch" id="ses-box" style="height:280px"><canvas id="c-ses" role="img" aria-label="Diplomas por sesión del Consejo Universitario"></canvas></div></div>
   </div>
 
-  <div class="section-label">Tablas</div>
+  <div class="section-label"><i class="fas fa-table" style="color:var(--celeste)"></i>Tablas</div>
   <div class="panel" style="margin-bottom:28px">
     <div class="tabs" role="tablist" id="tabs">
       <button type="button" role="tab" data-t="year" aria-selected="true">Por año</button>
@@ -343,12 +323,14 @@ const MESES_L=['enero','febrero','marzo','abril','mayo','junio','julio','agosto'
 const TIPO_N=['Bachillerato','Título'];
 const fmt=n=>Math.round(n).toLocaleString('es-PE').replace(/ /g,' ');
 const fmt1=n=>n.toLocaleString('es-PE',{maximumFractionDigits:1,minimumFractionDigits:1});
-let YEARS=[],LASTSESS='';
+let YEARS=[],LASTSESS='',FACU=[],SEDEU=[];   // facultades/sedes con al menos un diploma
 const dtxt=s=>{const [y,m,d]=s.split('-').map(Number);return d+' de '+MESES_L[m-1]+' de '+y;};
 const dshort=s=>{const [y,m,d]=s.split('-').map(Number);return d+' '+MESES[m-1]+' '+String(y).slice(2);};
 const yl=y=>y+(String(LASTSESS).startsWith(y)&&LASTSESS.slice(5,7)<'12'?'*':'');
 
-const st={tipo:'all',year:'all',fac:'all',sede:'all'};
+const st={tipo:'all',from:0,to:0,fac:'all',sede:'all'};   // from/to: rango de años (0 = sin fijar aún)
+const inR=y=>y>=st.from&&y<=st.to;
+const YV=()=>YEARS.filter(inR);
 const $=id=>document.getElementById(id);
 const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 const charts={};
@@ -358,18 +340,25 @@ function fillSelect(id,items,allLabel){
   $(id).innerHTML='<option value="all">'+allLabel+'</option>'+items.map(([v,l])=>'<option value="'+v+'">'+l+'</option>').join('');
 }
 $('f-tipo').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;st.tipo=b.dataset.v;sync();render();});
-['year','fac','sede'].forEach(k=>$('f-'+k).addEventListener('change',e=>{st[k]=e.target.value;render();}));
-$('reset').addEventListener('click',()=>{st.tipo=st.year=st.fac=st.sede='all';sync();render();});
+['fac','sede'].forEach(k=>$('f-'+k).addEventListener('change',e=>{st[k]=e.target.value;render();}));
+$('f-from').addEventListener('change',e=>{st.from=+e.target.value;if(st.to<st.from)st.to=st.from;sync();render();});
+$('f-to').addEventListener('change',e=>{st.to=+e.target.value;if(st.from>st.to)st.from=st.to;sync();render();});
+document.querySelectorAll('[data-quick]').forEach(b=>b.addEventListener('click',()=>{
+  const q=b.dataset.quick;if(q==='all'){st.from=YEARS[0];st.to=YEARS[YEARS.length-1];}
+  else if(q==='last'){st.from=st.to=YEARS[YEARS.length-1];}
+  else if(q==='last2'){st.from=YEARS[Math.max(0,YEARS.length-2)];st.to=YEARS[YEARS.length-1];}
+  sync();render();}));
+$('reset').addEventListener('click',()=>{st.tipo=st.fac=st.sede='all';st.from=YEARS[0];st.to=YEARS[YEARS.length-1];sync();render();});
 function sync(){
   document.querySelectorAll('#f-tipo button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===String(st.tipo)));
-  $('f-year').value=st.year;$('f-fac').value=st.fac;$('f-sede').value=st.sede;
+  $('f-from').value=st.from;$('f-to').value=st.to;$('f-fac').value=st.fac;$('f-sede').value=st.sede;
 }
 const tipos=()=>st.tipo==='all'?[0,1]:[+st.tipo];
 /* skip: names a filter that a chart ignores so it can show context */
 function sel(skip=[]){
   return D.rows.filter(r=>
     (st.tipo==='all'||r[T]==st.tipo)&&
-    (skip.includes('year')||st.year==='all'||r[Y]==st.year)&&
+    inR(r[Y])&&
     (skip.includes('fac')||st.fac==='all'||r[F]==st.fac)&&
     (skip.includes('sede')||st.sede==='all'||r[S]==st.sede));
 }
@@ -382,13 +371,13 @@ function count(rows,keyFn,keys){
 /* ---------- chart defaults ---------- */
 function theme(){
   const ink=css('--ink'),soft=css('--ink-soft'),grid=css('--line-soft');
-  Chart.defaults.font.family="'IBM Plex Sans',system-ui,sans-serif";
+  Chart.defaults.font.family="'Inter',system-ui,sans-serif";
   Chart.defaults.font.size=12;
   Chart.defaults.color=soft;
   Chart.defaults.borderColor=grid;
   return {ink,soft,grid,card:css('--card'),line:css('--line')};
 }
-const ttip=(th,extra={})=>({backgroundColor:th.card,titleColor:th.ink,bodyColor:th.ink,footerColor:th.soft,borderColor:th.line,borderWidth:1,padding:10,boxPadding:4,cornerRadius:3,usePointStyle:true,...extra});
+const ttip=(th,extra={})=>({backgroundColor:th.card,titleColor:th.ink,bodyColor:th.ink,footerColor:th.soft,borderColor:th.line,borderWidth:1,padding:10,boxPadding:4,cornerRadius:8,usePointStyle:true,...extra});
 function mk(id,cfg){
   if(charts[id])charts[id].destroy();
   charts[id]=new Chart($(id),cfg);
@@ -400,7 +389,7 @@ function sumFooter(items){const t=items.reduce((a,i)=>a+i.parsed[i.chart.options
 
 function tipoSets(th,keysData,labels,opts={}){
   const colors=[css('--c-bach'),css('--c-tit')];
-  return tipos().map(t=>({label:TIPO_N[t],data:labels.map(k=>keysData.get(k)[t]),backgroundColor:colors[t],borderColor:th.card,borderWidth:2,borderRadius:2,borderSkipped:false,maxBarThickness:opts.thick||34}));
+  return tipos().map(t=>({label:TIPO_N[t],data:labels.map(k=>keysData.get(k)[t]),backgroundColor:colors[t],borderColor:th.card,borderWidth:2,borderRadius:4,borderSkipped:false,maxBarThickness:opts.thick||34}));
 }
 
 /* ---------- render ---------- */
@@ -424,6 +413,8 @@ function render(){
     el.innerHTML=tipos().map(t=>'<span><i class="sw" style="background:'+(t?'var(--c-tit)':'var(--c-bach)')+'"></i>'+TIPO_N[t]+'</span>').join('');
   });
 
+  const per=st.from===st.to?'en '+st.from:'entre '+st.from+' y '+st.to;
+  $('resumen').textContent=total?('Se emitieron '+fmt(total)+' diplomas '+per+': '+fmt(nb)+' bachilleratos ('+fmt1(100*nb/total)+'%) y '+fmt(nt)+' títulos profesionales ('+fmt1(100*nt/total)+'%), en '+fmt(sess.size)+' sesiones del Consejo Universitario.'):'No hay registros con los filtros elegidos.';
   insights(rows);
   yearChart(th);monthChart(th);yoyCharts(th);heat(th);facChart(th);carChart(th,rows);
   modChart(th);sedeChart(th);sexoChart(th,rows);notaChart(th,rows);cohSection(th);sesChart(th,rows);table();
@@ -441,18 +432,18 @@ function insights(rows){
 }
 
 function yearChart(th){
-  const rows=sel(['year']);const m=count(rows,r=>r[Y],YEARS);
-  const sets=tipoSets(th,m,YEARS,{thick:56});
-  if(st.year!=='all')sets.forEach((s,i)=>{const base=s.backgroundColor;s.backgroundColor=YEARS.map(y=>y==st.year?base:base+'55');});
-  mk('c-year',{type:'bar',data:{labels:YEARS.map(yl),datasets:sets},options:{responsive:true,maintainAspectRatio:false,
+  const YS=YV();const rows=sel();const m=count(rows,r=>r[Y],YS);
+  const sets=tipoSets(th,m,YS,{thick:56});
+  mk('c-year',{type:'bar',data:{labels:YS.map(yl),datasets:sets},options:{responsive:true,maintainAspectRatio:false,
     plugins:{legend:{display:false},tooltip:ttip(th,{callbacks:{footer:sumFooter}})},
     scales:{x:{...noGrid,stacked:true},y:{...axis(th),stacked:true,beginAtZero:true,ticks:{padding:6,callback:v=>fmt(v)}}}}});
 }
 
-function monthKeys(){const ks=[];let [y,m]=D.sess.slice().sort()[0].split('-').map(Number);const [ey,em]=LASTSESS.split('-').map(Number);
+function monthKeys(){const ks=[];let [y,m]=D.sess.slice().sort()[0].split('-').map(Number);let [ey,em]=LASTSESS.split('-').map(Number);
+  if(y<st.from){y=st.from;m=1;} if(ey>st.to){ey=st.to;em=12;}
   while(y<ey||(y==ey&&m<=em)){ks.push(y*100+m);m++;if(m>12){m=1;y++;}}return ks;}
 function monthChart(th){
-  const rows=sel(['year']);const ks=monthKeys();const m=count(rows,r=>r[Y]*100+r[M],ks);
+  const rows=sel();const ks=monthKeys();const m=count(rows,r=>r[Y]*100+r[M],ks);
   const colors=[css('--c-bach'),css('--c-tit')];
   mk('c-month',{type:'line',data:{labels:ks.map(k=>MESES[k%100-1]+' '+String(Math.floor(k/100)).slice(2)),
     datasets:tipos().map(t=>({label:TIPO_N[t],data:ks.map(k=>m.get(k)[t]),borderColor:colors[t],backgroundColor:colors[t]+'22',borderWidth:2,pointRadius:0,pointHoverRadius:5,pointHoverBackgroundColor:colors[t],pointHoverBorderColor:th.card,pointHoverBorderWidth:2,tension:0,fill:st.tipo!=='all'}))},
@@ -465,9 +456,9 @@ const hx=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16));
 const mixHex=(a,b,t)=>'#'+hx(a).map((v,i)=>Math.round(v+(hx(b)[i]-v)*t).toString(16).padStart(2,'0')).join('');
 function yearPalette(n){const a=css('--c-muted'),b=css('--c-tit');return Array.from({length:n},(_,i)=>i==n-1?css('--c-bach'):mixHex(a,b,n>2?i/(n-2):1));}
 function yoyCharts(th){
-  const rows=sel(['year']);
+  const rows=sel();const YEARS=YV();
   const m=new Map();rows.forEach(r=>{const k=r[Y]*100+r[M];m.set(k,(m.get(k)||0)+1);});
-  const [ly,lm]=LASTSESS.split('-').map(Number);
+  const [ly0,lm0]=LASTSESS.split('-').map(Number);const ly=ly0,lm=ly0<=st.to?lm0:12;
   const pal=yearPalette(YEARS.length);
   const mensual=YEARS.map(y=>MESES.map((_,i)=>(y==ly&&i+1>lm)?null:(m.get(y*100+i+1)||0)));
   const acum=mensual.map(a=>{let c=0;return a.map(v=>v==null?null:(c+=v));});
@@ -487,7 +478,7 @@ function yoyCharts(th){
 }
 
 function heat(th){
-  const rows=sel(['year']);const m=new Map();rows.forEach(r=>{const k=r[Y]*100+r[M];m.set(k,(m.get(k)||0)+1);});
+  const rows=sel();const YEARS=YV();const m=new Map();rows.forEach(r=>{const k=r[Y]*100+r[M];m.set(k,(m.get(k)||0)+1);});
   const max=Math.max(1,...m.values());
   let h='<div></div>'+MESES.map(x=>'<div class="h">'+x+'</div>').join('');
   YEARS.forEach(y=>{
@@ -503,7 +494,7 @@ function heat(th){
 }
 
 function facChart(th){
-  const rows=sel(['fac']);const idx=D.fac.map((_,i)=>i);const m=count(rows,r=>r[F],idx);
+  const rows=sel(['fac']);const idx=FACU.slice();const m=count(rows,r=>r[F],idx);
   const order=idx.slice().sort((a,b)=>(m.get(b)[0]+m.get(b)[1])-(m.get(a)[0]+m.get(a)[1]));
   const sets=tipoSets(th,m,order,{thick:26});
   if(st.fac!=='all')sets.forEach(s=>{const b=s.backgroundColor;s.backgroundColor=order.map(i=>i==st.fac?b:b+'55');});
@@ -529,11 +520,11 @@ function carChart(th,rows){
 function shareChart(id,th,keys,labels,colors,rowsAll){
   const m=new Map(keys.map(k=>[k,new Array(labels.length).fill(0)]));
   rowsAll.forEach(r=>{const a=m.get(r.k);if(a)a[r.v]++;});
-  const sets=labels.map((l,j)=>({label:l,data:keys.map(k=>{const a=m.get(k);const t=a.reduce((x,y)=>x+y,0);return t?100*a[j]/t:0;}),raw:keys.map(k=>m.get(k)[j]),backgroundColor:colors[j],borderColor:th.card,borderWidth:2,borderRadius:2,borderSkipped:false}));
+  const sets=labels.map((l,j)=>({label:l,data:keys.map(k=>{const a=m.get(k);const t=a.reduce((x,y)=>x+y,0);return t?100*a[j]/t:0;}),raw:keys.map(k=>m.get(k)[j]),backgroundColor:colors[j],borderColor:th.card,borderWidth:2,borderRadius:4,borderSkipped:false}));
   return sets;
 }
 function modChart(th){
-  const rows=sel(['year']);
+  const rows=sel();const YEARS=YV();
   [['c-modb','lg-modb','p-modb',0,[0,1],[css('--c-bach'),css('--c-teal')]],['c-modt','lg-modt','p-modt',1,[2,3],[css('--c-tit'),css('--c-slate')]]].forEach(([cid,lid,pid,t,ms,cols])=>{
     const show=st.tipo==='all'||st.tipo==t;$(pid).hidden=!show;if(!show)return;
     const rr=rows.filter(r=>r[T]==t).map(r=>({k:r[Y],v:ms.indexOf(r[MO])}));
@@ -547,7 +538,7 @@ function modChart(th){
 }
 
 function sedeChart(th){
-  const rows=sel(['sede']);const idx=D.sede.map((_,i)=>i);const m=count(rows,r=>r[S],idx);
+  const rows=sel(['sede']);const idx=SEDEU.slice();const m=count(rows,r=>r[S],idx);
   const order=idx.slice().sort((a,b)=>(a==4)-(b==4)||(m.get(b)[0]+m.get(b)[1])-(m.get(a)[0]+m.get(a)[1]));
   const sets=tipoSets(th,m,order,{thick:26});
   if(st.sede!=='all')sets.forEach(s=>{const b=s.backgroundColor;s.backgroundColor=order.map(i=>i==st.sede?b:b+'55');});
@@ -573,14 +564,14 @@ function notaChart(th,rows){
   const ks=[11,12,13,14,15,16,17,18,19,20];const m=new Map(ks.map(k=>[k,0]));rr.forEach(r=>m.has(r[N])&&m.set(r[N],m.get(r[N])+1));
   const avg=rr.length?rr.reduce((a,r)=>a+r[N],0)/rr.length:0;
   $('note-nota').textContent=rr.length?'Nota promedio '+fmt1(avg)+' sobre '+fmt(rr.length)+' títulos con nota registrada.':'Sin notas registradas con este filtro.';
-  mk('c-nota',{type:'bar',data:{labels:ks,datasets:[{label:'Títulos',data:ks.map(k=>m.get(k)),backgroundColor:css('--c-tit'),borderRadius:2,borderSkipped:false,maxBarThickness:30}]},options:{responsive:true,maintainAspectRatio:false,
+  mk('c-nota',{type:'bar',data:{labels:ks,datasets:[{label:'Títulos',data:ks.map(k=>m.get(k)),backgroundColor:css('--c-tit'),borderRadius:4,borderSkipped:false,maxBarThickness:30}]},options:{responsive:true,maintainAspectRatio:false,
     plugins:{legend:{display:false},tooltip:ttip(th,{callbacks:{title:i=>'Nota '+i[0].label}})},
     scales:{x:{...noGrid,title:{display:true,text:'Nota final',color:th.soft}},y:{...axis(th),beginAtZero:true,ticks:{padding:6,callback:v=>fmt(v)}}}}});
 }
 
 /* ---------- de bachiller a titulado (el cruce por DNI se hizo en el servidor; aquí solo llegan agregados anónimos) ---------- */
 const CY=0,CF=1,CC=2,CS=3,CL=4,CO=5;
-function cohSel(skipYear){return D.coh.filter(r=>(skipYear||st.year==='all'||r[CY]==st.year)&&(st.fac==='all'||r[CF]==st.fac)&&(st.sede==='all'||r[CS]==st.sede));}
+function cohSel(skipYear){return D.coh.filter(r=>inR(r[CY])&&(st.fac==='all'||r[CF]==st.fac)&&(st.sede==='all'||r[CS]==st.sede));}
 function tasa(rows,h){const el=rows.filter(r=>r[CO]>=h);if(el.length<30)return null;const n=el.filter(r=>r[CL]>=0&&r[CL]<h).length;return {p:100*n/el.length,n:n,N:el.length};}
 function mediana(a){if(!a.length)return null;const b=a.slice().sort((x,y)=>x-y),m=b.length>>1;return b.length%2?b[m]:(b[m-1]+b[m])/2;}
 function cohSection(th){
@@ -609,7 +600,7 @@ function cohSection(th){
   const cols=[.5,.75,1].map(t=>mixHex(css('--c-muted'),css('--c-tit'),t));
   $('lg-coh').innerHTML=H.map((h,i)=>'<span><i class="sw" style="background:'+cols[i]+'"></i>'+h+' meses</span>').join('');
   const sets=H.map((h,i)=>{const t=ys.map(y=>tasa(base.filter(r=>r[CY]==y),h));
-    return {label:h+' meses',data:t.map(x=>x?x.p:null),info:t,backgroundColor:cols[i],borderColor:th.card,borderWidth:2,borderRadius:2,borderSkipped:false,maxBarThickness:34};});
+    return {label:h+' meses',data:t.map(x=>x?x.p:null),info:t,backgroundColor:cols[i],borderColor:th.card,borderWidth:2,borderRadius:4,borderSkipped:false,maxBarThickness:34};});
   mk('c-coh',{type:'bar',data:{labels:ys.map(yl),datasets:sets},options:{responsive:true,maintainAspectRatio:false,
     plugins:{legend:{display:false},tooltip:ttip(th,{callbacks:{label:c=>{const i=c.dataset.info[c.dataIndex];return i?c.dataset.label+': '+fmt1(i.p)+'% ('+fmt(i.n)+' de '+fmt(i.N)+')':null;}}})},
     scales:{x:{...noGrid},y:{...axis(th),beginAtZero:true,ticks:{padding:6,callback:v=>v+'%'}}}}});
@@ -619,14 +610,14 @@ function cohSection(th){
   titulados.forEach(r=>bins[Math.min(16,Math.floor(r[CL]/3))]++);
   const lab=bins.map((_,i)=>i==16?'48+':(i*3)+'–'+(i*3+2));
   $('note-lag').textContent=titulados.length?'Mediana de '+fmt(med)+' meses entre '+fmt(titulados.length)+' bachilleres ya titulados. Las promociones recientes aún no completan su plazo, por eso este gráfico muestra tiempos más cortos de los reales.':'Sin bachilleres titulados con estos filtros.';
-  mk('c-lag',{type:'bar',data:{labels:lab,datasets:[{label:'Titulados',data:bins,backgroundColor:css('--c-tit'),borderRadius:2,borderSkipped:false,maxBarThickness:28}]},options:{responsive:true,maintainAspectRatio:false,
+  mk('c-lag',{type:'bar',data:{labels:lab,datasets:[{label:'Titulados',data:bins,backgroundColor:css('--c-tit'),borderRadius:4,borderSkipped:false,maxBarThickness:28}]},options:{responsive:true,maintainAspectRatio:false,
     plugins:{legend:{display:false},tooltip:ttip(th,{callbacks:{title:i=>i[0].label+' meses'}})},
     scales:{x:{...noGrid,title:{display:true,text:'Meses desde el bachillerato',color:th.soft},ticks:{color:th.soft,maxRotation:0,autoSkip:true,maxTicksLimit:9}},y:{...axis(th),beginAtZero:true,ticks:{padding:6,callback:v=>fmt(v)}}}}});
 
   /* C: tasa a 24 meses por carrera */
   const por=D.car.map((_,i)=>({i,t:tasa(all.filter(r=>r[CC]==i),24)})).filter(x=>x.t).sort((a,b)=>b.t.p-a.t.p);
   $('cohcar-box').style.height=Math.max(110,por.length*30+50)+'px';
-  mk('c-cohcar',{type:'bar',data:{labels:por.map(x=>D.car[x.i]),datasets:[{label:'Titulados a 24 meses',data:por.map(x=>x.t.p),info:por.map(x=>x.t),backgroundColor:css('--c-tit'),borderRadius:2,borderSkipped:false,maxBarThickness:20}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+  mk('c-cohcar',{type:'bar',data:{labels:por.map(x=>D.car[x.i]),datasets:[{label:'Titulados a 24 meses',data:por.map(x=>x.t.p),info:por.map(x=>x.t),backgroundColor:css('--c-tit'),borderRadius:4,borderSkipped:false,maxBarThickness:20}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
     plugins:{legend:{display:false},tooltip:ttip(th,{callbacks:{label:c=>{const i=c.dataset.info[c.dataIndex];return fmt1(i.p)+'% ('+fmt(i.n)+' de '+fmt(i.N)+')';}}})},
     scales:{y:{...noGrid,ticks:{color:th.ink,font:{size:11.5},autoSkip:false}},x:{...axis(th),beginAtZero:true,ticks:{padding:6,callback:v=>v+'%'}}}}});
 }
@@ -647,7 +638,7 @@ $('tabs').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)
   document.querySelectorAll('#tabs button').forEach(x=>x.setAttribute('aria-selected',x===b));table();});
 function table(){
   const rows=sel();
-  const defs={year:['Año',YEARS,r=>r[Y],k=>yl(k)],fac:['Facultad',D.fac.map((_,i)=>i),r=>r[F],k=>D.fac[k]],car:['Carrera',D.car.map((_,i)=>i),r=>r[C],k=>D.car[k]],sede:['Sede',D.sede.map((_,i)=>i),r=>r[S],k=>D.sede[k]]}[tab];
+  const defs={year:['Año',YV(),r=>r[Y],k=>yl(k)],fac:['Facultad',FACU,r=>r[F],k=>D.fac[k]],car:['Carrera',D.car.map((_,i)=>i),r=>r[C],k=>D.car[k]],sede:['Sede',SEDEU,r=>r[S],k=>D.sede[k]]}[tab];
   const m=count(rows,defs[2],defs[1]);
   let ks=defs[1].filter(k=>m.get(k)[0]+m.get(k)[1]>0);
   if(tab!=='year')ks.sort((a,b)=>(m.get(b)[0]+m.get(b)[1])-(m.get(a)[0]+m.get(a)[1]));
@@ -659,8 +650,7 @@ function table(){
 
 /* ---------- theme changes ---------- */
 let tmr;const re=()=>{clearTimeout(tmr);tmr=setTimeout(render,60);};
-matchMedia('(prefers-color-scheme: dark)').addEventListener('change',re);
-new MutationObserver(re).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+
 document.fonts&&document.fonts.ready.then(()=>render());
 
 /* ---------- datos en vivo ---------- */
@@ -668,11 +658,15 @@ function setData(d){
   D=d;
   YEARS=[...new Set(D.rows.map(r=>r[Y]))].sort();
   LASTSESS=D.sess.slice().sort().pop();
-  fillSelect('f-year',YEARS.map(y=>[y,yl(y)]),'Todos');
-  fillSelect('f-fac',D.fac.map((f,i)=>[i,f]),'Todas');
-  fillSelect('f-sede',D.sede.map((f,i)=>[i,f]),'Todas');
-  if(st.year!=='all'&&!YEARS.includes(+st.year))st.year='all';
-  if(st.fac!=='all'&&+st.fac>=D.fac.length)st.fac='all';
+  const yo=YEARS.map(y=>'<option value="'+y+'">'+y+'</option>').join('');$('f-from').innerHTML=yo;$('f-to').innerHTML=yo;
+  FACU=[...new Set(D.rows.map(r=>r[F]))].sort((a,b)=>a-b);SEDEU=[...new Set(D.rows.map(r=>r[S]))].sort((a,b)=>a-b);
+  fillSelect('f-fac',FACU.map(i=>[i,D.fac[i]]),'Todas');
+  fillSelect('f-sede',SEDEU.map(i=>[i,D.sede[i]]),'Todas');
+  if(!st.from||!YEARS.includes(st.from))st.from=YEARS[0];
+  if(!st.to||!YEARS.includes(st.to))st.to=YEARS[YEARS.length-1];
+  if(st.from>st.to)st.from=st.to;
+  if(st.fac!=='all'&&!FACU.includes(+st.fac))st.fac='all';
+  if(st.sede!=='all'&&!SEDEU.includes(+st.sede))st.sede='all';
   sync();
 }
 function setStatus(kind,txt){const el=$('upd');el.className='upd '+kind;el.textContent=txt;}
@@ -699,5 +693,4 @@ setInterval(load,REFRESCO_MIN*60000);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)load();});
 setData(D);render();load();
 </script>
-</body>
-</html>
+</body></html>
