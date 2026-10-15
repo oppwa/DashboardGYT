@@ -580,7 +580,7 @@ function cohSection(th){
   if(!D.coh||!D.coh.length){sec.hidden=true;return;}
   sec.hidden=false;
   const mc=D.meta&&D.meta.coh;
-  $('coh-meta').textContent='Sigue a cada bachiller hasta su título (cruce por DNI y carrera hecho en el servidor; no se publica ningún DNI). Esta sección ignora el filtro de tipo de diploma.'+
+  $('coh-meta').textContent='Sigue a cada bachiller hasta su título.'+
     (mc&&mc.titulosTotal?' De '+fmt(mc.titulosTotal)+' títulos de la hoja, '+fmt(mc.titulosConBach)+' ('+fmt1(100*mc.titulosConBach/mc.titulosTotal)+'%) corresponden a bachilleratos emitidos desde 2022; el resto obtuvo el bachillerato antes y no entra aquí.':'');
 
   const all=cohSel(false);
